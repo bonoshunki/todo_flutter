@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "435488224444",
+    "project_id": "shunkitodo",
+    "storage_bucket": "shunkitodo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435488224444:android:acff919b7e34fe9c1dccb9",
+        "android_client_info": {
+          "package_name": "com.shunki.todo_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435488224444-tl9m883roi2hp8g957deo01388lvaln2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzP-_QmBKjWDFCm-SDKoyG8FMSOYlr-s4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435488224444-tl9m883roi2hp8g957deo01388lvaln2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "435488224444-levnqockp0nfbl5d78iq9ds2ukqij080.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shunki.todo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

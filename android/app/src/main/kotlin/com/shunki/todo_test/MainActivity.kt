@@ -1,4 +1,4 @@
-package com.example.todo_test
+package com.shunki.todo_test
 
 import io.flutter.embedding.android.FlutterActivity
 

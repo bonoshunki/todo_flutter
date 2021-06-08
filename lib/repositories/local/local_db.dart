@@ -9,7 +9,7 @@ class LocalDB {
     const scripts = {
       '2' : ['ALTER TABLE todo ADD COLUMN achieved INTEGER;'],
     };
-    // await deleteDatabase(p.join(await getDatabasesPath(), 'local.db'));
+    await deleteDatabase(p.join(await getDatabasesPath(), 'local.db'));
 
 
     final path = p.join(await getDatabasesPath(), 'local.db');

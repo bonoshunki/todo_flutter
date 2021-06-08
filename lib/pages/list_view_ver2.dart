@@ -36,21 +36,7 @@ class TodoListPageVer2 extends StatelessWidget {
               }).toList(),
             ),
           ),
-          body:
-              // FutureBuilder(
-              // future: todoController.retrieve(),
-              // builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //   if (snapshot.connectionState == ConnectionState.waiting) {
-              //     print('please wait...');
-              //     return Text("データ取得中");
-              //   } else {
-              //     print(todoList);
-              //     print("done");
-              //     return TabBarView(children: _tabs.map((tab) => tab.widget).toList())
-              //   ;
-              // }
-              // }),
-              TabBarView(children: _tabs.map((tab) => tab.widget).toList()),
+          body: TabBarView(children: _tabs.map((tab) => tab.widget).toList()),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -79,7 +65,7 @@ class _TodoListView extends StatelessWidget {
   final List<Todo> todoList;
 
   _TodoListView({required this.todoList});
-
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
@@ -100,13 +86,12 @@ class _AchievedTodoListView extends StatelessWidget {
   final List<Todo> todoList;
 
   _AchievedTodoListView({required this.todoList});
-
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
         itemCount: todoList.length,
         itemBuilder: (context, index) {
-          // print(todoList[index].achieved);
           if (todoList[index].achieved) {
             return TodoCardVer2(todo: todoList[index]);
           } else {

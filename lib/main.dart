@@ -1,13 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo_test/controllers/todo_controller.dart';
-import 'package:todo_test/pages/list_view.dart';
+import 'package:todo_test/controllers/firebase_auth.dart';
+import 'package:todo_test/pages/home.dart';
 import 'package:todo_test/pages/list_view_ver2.dart';
+import 'package:todo_test/routes/auth/routes.dart';
+import 'package:todo_test/routes/home/routes.dart';
+import 'pages/auth_view.dart';
 import 'package:todo_test/repositories/local/local_db.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalDB.init();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -16,65 +21,58 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: _Home());
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      debugShowCheckedModeBanner: false,
+      initialRoute: AuthRoutes.first,
+      routes: {
+        AuthRoutes.first: (context) => _FirstPage(),
+        AuthRoutes.signUpEmail: (context) => SignUpEmailPage(),
+        AuthRoutes.signInEmail: (context) => SignInEmailPage(),
+        HomeRoutes.home: (context) => HomePage(),
+        HomeRoutes.todoListVer2: (context) => TodoListPageVer2(),
+      },
+    );
   }
 }
 
-class _Home extends StatelessWidget {
+class _FirstPage extends StatelessWidget {
+  static User? user = AuthController().auth.currentUser;
+
   @override
   Widget build(BuildContext context) {
+    if (user != null && user!.emailVerified) {
+      return HomePage();
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Sign in'),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              child: Text(
-                'ver.1',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(primary: Colors.blue),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ChangeNotifierProvider<TodoController>(
-                        create: (_) => TodoController()..retrieve(),
-                        child: TodoListPage(),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-            const SizedBox(
-              height: 36,
-            ),
+          children: <Widget>[
             ElevatedButton(
               child: const Text(
-                'ver.2',
-                style: TextStyle(color: Colors.white),
+                'Sign in',
+                style: TextStyle(color: Colors.black),
               ),
               style: ElevatedButton.styleFrom(primary: Colors.blue),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ChangeNotifierProvider<TodoController>(
-                        create: (_) => TodoController()..retrieve(),
-                        child: TodoListPageVer2(),
-                      );
-                    },
-                  ),
-                );
+              onPressed: () async {
+                Navigator.of(context).pushNamed(AuthRoutes.signInEmail);
+              },
+            ),
+            SizedBox(height: 32),
+            ElevatedButton(
+              child: const Text(
+                'Sign up',
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ElevatedButton.styleFrom(primary: Colors.white),
+              onPressed: () async {
+                Navigator.of(context).pushNamed(AuthRoutes.signUpEmail);
               },
             ),
           ],

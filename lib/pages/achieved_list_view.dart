@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_test/widgets/todo_card.dart';
 
 class AchievedTodoListPage extends StatelessWidget {
-  // final List<Todo> todoList;
+  // final zList<Todo> todoList;
   // AchievedTodoListPage({required this.todoList});
 
   Widget build (BuildContext context) {
